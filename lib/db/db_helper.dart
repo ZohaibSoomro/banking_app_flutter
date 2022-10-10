@@ -24,7 +24,7 @@ class DbHelper {
 
   Future<List<Customer>> getAllCustomers() async {
     List<Customer> customers = [];
-    final db = await database;
+    final db = await instance.database;
     final result = await db.query(tableName);
     for (var customerData in result) {
       customers.add(Customer.fromJson(customerData));
@@ -77,10 +77,18 @@ class DbHelper {
     print("$transfer inserted into db");
   }
 
-  Future<List<TransferTransaction>> getAllTransfersOfCustomer() async {
+  Future<List<TransferTransaction>> getAllTransfersOfCustomer(
+      Customer customer) async {
     List<TransferTransaction> transfers = [];
     final db = await database;
-    final result = await db.query(tableName2);
+    final result = await db.query(
+      tableName2,
+      where: 'to_name=? OR from_name=?',
+      whereArgs: [
+        customer.name,
+        customer.name,
+      ],
+    );
     for (var transferData in result) {
       transfers.add(TransferTransaction.fromJson(transferData));
     }

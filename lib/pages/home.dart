@@ -1,4 +1,3 @@
-import 'package:banking_app/pages/select_customer_page.dart';
 import 'package:banking_app/pages/select_operation_page.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    loadData();
     loadData();
   }
 
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               )
             : customerList.isEmpty
                 ? const Center(
-                    child: Text('Refresh data now.'),
+                    child: Text('No data available.'),
                   )
                 : ListView.builder(
                     padding: const EdgeInsets.only(bottom: 10.0),
@@ -84,6 +84,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     await _dbHelper.deleteDb();
+      //   },
+      // ),
     );
   }
 }

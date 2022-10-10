@@ -50,7 +50,8 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
     setState(() {
       isLoading = true;
     });
-    final history = await _dbHelper.getAllTransfersOfCustomer();
+    final history =
+        await _dbHelper.getAllTransfersOfCustomer(widget.selectedCustomer);
     if (history.isNotEmpty) {
       setState(() {
         transactions = history;
